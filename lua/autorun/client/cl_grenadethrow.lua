@@ -5,8 +5,11 @@ function NadeKeyPress(ply,key)
 	
 	if ply:KeyDown(IN_USE) then
 	
-		if not ply:GetActiveWeapon():IsScripted() then return end
-		if not ply:GetActiveWeapon().Base == "weapon_cs_base" then return end	
+		if not IsValid(ply:GetActiveWeapon()) then return end
+		if not ply:GetActiveWeapon():IsScripted() then return end	
+		if ply:GetActiveWeapon().Base ~= "weapon_cs_base" then return end	
+		
+		print( ply:GetActiveWeapon().Base)
 		
 		if key == IN_ATTACK then
 			if not ply:HasWeapon("weapon_cs_he") then return end
