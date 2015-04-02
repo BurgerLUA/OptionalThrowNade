@@ -4,11 +4,15 @@ net.Receive( "ThrowQuickGrenade", function( len, ply )
 
 
 	if not IsValid(ply) then return end
+	if ply:InVehicle() then return end
+	if ply:GetActiveWeapon():IsBusy() == true then return end
+	if ply:GetActiveWeapon():GetNWInt("zoommode",0) ~= 0 then return end
+	
+	
 	
 	if num == 1 then
 		if not ply:HasWeapon("weapon_cs_he") then return end
 		if ply:GetActiveWeapon():GetClass() == "weapon_cs_he" then return end	
-		if ply:InVehicle() then return end
 		
 		ply:SelectWeapon("weapon_cs_he")
 		ply:GetActiveWeapon():QuickThrow()
@@ -16,12 +20,8 @@ net.Receive( "ThrowQuickGrenade", function( len, ply )
 	elseif num == 2 then
 		if not ply:HasWeapon("weapon_cs_knife") then return end
 		if ply:GetActiveWeapon():GetClass() == "weapon_cs_knife" then return end	
-		if ply:InVehicle() then return end
-		
-		
+
 		ply:SelectWeapon("weapon_cs_knife")
-		
-		--ply:SendLua("LocalPlayer():GetActiveWeapon():SecondaryAttack()")
 		ply:GetActiveWeapon():QuickKnife()
 
 	end

@@ -8,13 +8,14 @@ function NadeKeyPress(ply,key)
 		if not IsValid(ply:GetActiveWeapon()) then return end
 		if not ply:GetActiveWeapon():IsScripted() then return end	
 		if ply:GetActiveWeapon().Base ~= "weapon_cs_base" then return end	
-		
-		print( ply:GetActiveWeapon().Base)
+		if ply:GetActiveWeapon():IsBusy() == true then return end
+		if ply:GetActiveWeapon():GetNWInt("zoommode",0) ~= 0 then return end
 		
 		if key == IN_ATTACK then
 			if not ply:HasWeapon("weapon_cs_he") then return end
 			if ply:GetActiveWeapon():GetClass() == "weapon_cs_he" then return end	
 			if ply:InVehicle() then return end
+		
 			
 			--ply:GetActiveWeapon():QuickThrow()
 			
